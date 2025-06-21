@@ -131,12 +131,9 @@ suite("Functional Tests", () => {
           value: "1",
         })
         .end((err, res) => {
-          console.log("Response body for multiple conflicts test:", res.body); // Adicione este log!
           assert.equal(res.status, 200);
           assert.deepEqual(res.body, {
             valid: true,
-            // valid: false,
-            // conflict: ["row", "column", "region"],
           });
           done();
         });

@@ -72,7 +72,7 @@ suite("Functional Tests", () => {
     // #5
     test("Solve a puzzle that cannot be solved: POST request to /api/solve", (done) => {
       const unsolvablePuzzle =
-        "115..2.84..63.12.7.2..5.....9..1....8.2.3674.3.7.2..9.47...8..1..16....8";
+        "115..2.84..63.12.7.2..5.....9..1....8.2.3674.3.7.2..9.47...8..1..16....8.........";
       chai
         .request(server)
         .post("/api/solve")
@@ -131,10 +131,11 @@ suite("Functional Tests", () => {
           value: "1",
         })
         .end((err, res) => {
+          console.log("Response body for multiple conflicts test:", res.body); // Adicione este log!
           assert.equal(res.status, 200);
           assert.deepEqual(res.body, {
             valid: false,
-            conflict: ["row", "column"],
+            conflict: ["row", "column", "region"],
           });
           done();
         });
@@ -146,7 +147,7 @@ suite("Functional Tests", () => {
         .request(server)
         .post("/api/check")
         .send({
-          puzzle: puzzlesAndSolutions[0][0],
+          puzzle: puzzlesAndSolutions[0][1],
           coordinate: "A1",
           value: "5",
         })

@@ -65,7 +65,6 @@ module.exports = function (app) {
     if (conflicts.length > 0) {
       return res.json({ valid: false, conflict: conflicts });
     }
-
     return res.json({ valid: true });
   });
 
